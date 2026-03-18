@@ -1,3 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Cabinet+Grotesk:wght@400;500;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --os-bg: #e8e4d9;
+  --os-blue: #2563eb;
+  --os-blue-light: #dbeafe;
+  --os-yellow: #f59e0b;
+  --os-orange: #f97316;
+  --os-cream: #faf8f3;
+  --os-dark: #1e1b2e;
+  --os-text: #1e1b2e;
+  --os-muted: #6b7280;
+  --os-border: rgba(30,27,46,0.1);
+  --os-window-bg: #faf8f3;
+  --os-window-shadow: 0 25px 60px rgba(30,27,46,0.18), 0 8px 20px rgba(30,27,46,0.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root { width: 100%; height: 100%; overflow: hidden; }
+
+body {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  background: var(--os-bg);
+  color: var(--os-text);
+  cursor: default;
+  user-select: none;
+}
