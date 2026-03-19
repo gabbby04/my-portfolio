@@ -10,7 +10,7 @@ const bootLines = [
   '>',
   '> Ahron Mosqe Gabriel C. Javier',
   '> Frontend Developer · UI/UX · NCII',
-  '> Philippines · Class of 2025',
+  '> Philippines · Class of 2026',
   '>',
   '> "The universe has a beginning,',
   '>  but no end. — Infinite."',

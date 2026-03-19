@@ -1,6 +1,6 @@
 import { MapPin, CalendarDays, Award } from 'lucide-react'
 
-export default function HeroApp() {
+export default function HeroApp({ onOpenProjects }) {
   return (
     <div className="p-8 h-full flex flex-col justify-between" style={{ background: 'var(--os-cream)' }}>
       <div>
@@ -31,7 +31,7 @@ export default function HeroApp() {
         <div className="flex flex-col gap-2 mb-5">
           {[
             { icon: MapPin,       text: 'Philippines'                        },
-            { icon: CalendarDays, text: 'BS Computer Science · Class of 2025' },
+            { icon: CalendarDays, text: 'BS Computer Science · Class of 2026' },
             { icon: Award,        text: 'NCII — Computer Systems Servicing'   },
           ].map(({ icon: Icon, text }) => (
             <div key={text} className="flex items-center gap-2">
@@ -54,11 +54,12 @@ export default function HeroApp() {
       </div>
 
       <div className="flex gap-3 mt-6">
-        <a href="#"
+        <button
+          onClick={onOpenProjects}
           className="px-4 py-2 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90"
           style={{ background: 'var(--os-blue)', fontFamily: 'DM Mono', fontSize: '0.75rem' }}>
           View Projects
-        </a>
+        </button>
         <a href="resume.pdf" download
           className="px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:opacity-80"
           style={{ background: 'rgba(30,27,46,0.07)', color: 'var(--os-dark)', fontFamily: 'DM Mono', fontSize: '0.75rem' }}>

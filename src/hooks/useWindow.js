@@ -7,12 +7,13 @@ export default function useWindow(initialState = {}) {
     projects: { open: false, minimized: false, zIndex: 9,  x: 200, y: 80  },
     contact:  { open: false, minimized: false, zIndex: 9,  x: 120, y: 90  },
     secret:   { open: false, minimized: false, zIndex: 9,  x: 240, y: 120 },
-    ...initialState
+    readme:   { open: false, minimized: false, zIndex: 9,  x: 180, y: 110 },
+    photos:   { open: false, minimized: false, zIndex: 9,  x: 140, y: 90  },
+    music:    { open: false, minimized: false, zIndex: 9,  x: 300, y: 100 },
   })
 
-
-
   const [topZ, setTopZ] = useState(20)
+
   const openWindow = useCallback((id) => {
     setTopZ(z => z + 1)
     setWindows(w => ({
@@ -38,6 +39,5 @@ export default function useWindow(initialState = {}) {
     setWindows(w => ({ ...w, [id]: { ...w[id], x, y } }))
   }, [])
 
-  
   return { windows, openWindow, closeWindow, minimizeWindow, focusWindow, moveWindow }
 }

@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
-import { User, Zap, FolderOpen, Mail, Terminal } from 'lucide-react'
+import { User, Zap, FolderOpen, Mail, Terminal, FileText, Image, Music } from 'lucide-react'
 
 const apps = [
-  { id: 'hero',     icon: User,       label: 'About Me'  },
-  { id: 'skills',   icon: Zap,        label: 'Skills'    },
-  { id: 'projects', icon: FolderOpen, label: 'Projects'  },
-  { id: 'contact',  icon: Mail,       label: 'Contact'   },
-  { id: 'secret',   icon: Terminal,   label: '???'       },
+  { id: 'hero',     icon: User,      label: 'About Me'   },
+  { id: 'skills',   icon: Zap,       label: 'Skills'     },
+  { id: 'projects', icon: FolderOpen,label: 'Projects'   },
+  { id: 'contact',  icon: Mail,      label: 'Contact'    },
+  { id: 'readme',   icon: FileText,  label: 'README.txt' },
+  { id: 'photos',   icon: Image,     label: 'Gallery'    },
+  { id: 'music',    icon: Music,     label: 'Lo-fi'      },
+  { id: 'secret',   icon: Terminal,  label: '???'        },
 ]
 
 export default function Taskbar({ windows, onOpen }) {
@@ -32,7 +35,6 @@ export default function Taskbar({ windows, onOpen }) {
         border: '1px solid rgba(30,27,46,0.1)',
         boxShadow: '0 8px 32px rgba(30,27,46,0.12)',
       }}>
-
       {apps.map(({ id, icon: Icon, label }) => (
         <button key={id} onClick={() => onOpen(id)}
           title={label}
@@ -41,14 +43,11 @@ export default function Taskbar({ windows, onOpen }) {
             background: windows[id]?.open && !windows[id]?.minimized
               ? 'var(--os-blue-light)' : 'transparent'
           }}>
-          <Icon
-            size={18}
-            strokeWidth={1.5}
+          <Icon size={18} strokeWidth={1.5}
             style={{
               color: windows[id]?.open && !windows[id]?.minimized
                 ? 'var(--os-blue)' : 'var(--os-muted)'
-            }}
-          />
+            }} />
           <span className="absolute -top-8 bg-gray-900 text-white px-2 py-0.5 rounded-lg whitespace-nowrap pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"
             style={{ fontSize: '0.6rem', fontFamily: 'DM Mono' }}>
             {label}
@@ -60,16 +59,7 @@ export default function Taskbar({ windows, onOpen }) {
         </button>
       ))}
 
-      <div className="w-px h-5 mx-2" style={{ background: 'rgba(30,27,46,0.1)' }} />
-
-      <div className="flex flex-col items-center px-2">
-        <span className="text-xs font-mono font-medium" style={{ color: 'var(--os-dark)' }}>
-          {time}
-        </span>
-        <span style={{ color: 'var(--os-muted)', fontSize: '0.55rem', fontFamily: 'DM Mono', letterSpacing: '0.1em' }}>
-          PH TIME
-        </span>
-      </div>
+      
     </div>
   )
 }

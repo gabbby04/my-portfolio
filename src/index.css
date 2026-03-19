@@ -27,6 +27,6 @@ body {
   font-family: 'Cabinet Grotesk', sans-serif;
   background: var(--os-bg);
   color: var(--os-text);
-  cursor: default;
+  cursor:none;
   user-select: none;
 }
