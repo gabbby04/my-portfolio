@@ -5,7 +5,11 @@ export default function HeroApp() {
     <div className="p-8 h-full flex flex-col justify-between" style={{ background: 'var(--os-cream)' }}>
       <div>
         <div className="flex items-start gap-4 mb-6">
-            <img src="./mypic.png" className="w-20 h-20 rounded-2xl object-cover shrink-0" alt="Ahron" /> 
+            <img
+              src="./mypic.png"
+              className="w-28 h-28 rounded-2xl object-cover shrink-0"
+              alt="Ahron"
+            />
           <div>
             <div className="text-xs font-mono mb-1.5 tracking-widest"
               style={{ color: 'var(--os-blue)', fontSize: '0.6rem' }}>
