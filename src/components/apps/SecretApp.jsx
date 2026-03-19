@@ -76,10 +76,10 @@ export default function SecretApp() {
       onClick={() => inputRef.current?.focus()}
     >
       {displayed.map((line, i) => (
-        <div key={i} style={{ color: line.includes('El Psy') ? '#60a5fa' : '#00ff88' }}>
-          {line}
+        <div key={i} style={{ color: line?.includes('El Psy') ? '#60a5fa' : '#00ff88' }}>
+            {line}
         </div>
-      ))}
+        ))}
 
       {responses.map((r, i) => (
         <div key={i}>
