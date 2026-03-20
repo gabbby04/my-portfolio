@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { User, Zap, FolderOpen, Mail, Terminal, FileText, Image, Music } from 'lucide-react'
+import { User, Zap, FolderOpen, Mail, Terminal, FileText, Image, } from 'lucide-react'
 
 const apps = [
   { id: 'hero',     icon: User,      label: 'About Me'   },
@@ -8,11 +8,11 @@ const apps = [
   { id: 'contact',  icon: Mail,      label: 'Contact'    },
   { id: 'readme',   icon: FileText,  label: 'README.txt' },
   { id: 'photos',   icon: Image,     label: 'Gallery'    },
-  { id: 'music',    icon: Music,     label: 'Lo-fi'      },
+
   { id: 'secret',   icon: Terminal,  label: '???'        },
 ]
 
-export default function Taskbar({ windows, onOpen }) {
+export default function Taskbar({ windows, onOpen, onToggle }) {
   const [time, setTime] = useState('')
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function Taskbar({ windows, onOpen }) {
         boxShadow: '0 8px 32px rgba(30,27,46,0.12)',
       }}>
       {apps.map(({ id, icon: Icon, label }) => (
-        <button key={id} onClick={() => onOpen(id)}
+        <button key={id} onClick={() => onToggle(id)}
           title={label}
           className="relative flex flex-col items-center gap-0.5 px-3 py-2 rounded-xl transition-all hover:scale-110 active:scale-95 group"
           style={{

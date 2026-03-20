@@ -9,7 +9,7 @@ export default function useWindow(initialState = {}) {
     secret:   { open: false, minimized: false, zIndex: 9,  x: 240, y: 120 },
     readme:   { open: false, minimized: false, zIndex: 9,  x: 180, y: 110 },
     photos:   { open: false, minimized: false, zIndex: 9,  x: 140, y: 90  },
-    music:    { open: false, minimized: false, zIndex: 9,  x: 300, y: 100 },
+  
   })
 
   const [topZ, setTopZ] = useState(20)

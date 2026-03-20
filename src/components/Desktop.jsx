@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from 'react'
-import { User, Zap, FolderOpen, Mail, Terminal, FileText, Image, Music } from 'lucide-react'
+import { useEffect, useState, useRef, useCallback } from 'react'
+import { User, Zap, FolderOpen, Mail, Terminal, FileText, Image } from 'lucide-react'
 import useWindow from '../hooks/useWindow'
 import Window from './Window'
 import Taskbar from './Taskbar'
@@ -12,21 +12,20 @@ import ContactApp from './apps/ContactApp'
 import SecretApp from './apps/SecretApp'
 import ReadmeApp from './apps/ReadMeApp'
 import PhotosApp from './apps/PhotosApp'
-import MusicApp from './apps/MusicApp'
 
 const windowConfig = {
-  hero: { title: 'ahron.me', icon: User, width: 620, height: 560, component: null },
+  hero: { title: 'ahron.me', icon: User, width: 620, height: 560, component: HeroApp },
   skills:   { title: 'skills.exe',    icon: Zap,       width: 500, height: 420, component: SkillsApp   },
   projects: { title: 'projects/',     icon: FolderOpen,width: 560, height: 480, component: ProjectsApp },
   contact:  { title: 'contact.form',  icon: Mail,      width: 480, height: 500, component: ContactApp  },
   secret:   { title: 'terminal',      icon: Terminal,  width: 520, height: 380, component: SecretApp   },
   readme:   { title: 'README.txt',    icon: FileText,  width: 520, height: 460, component: ReadmeApp   },
   photos:   { title: 'gallery/',      icon: Image,     width: 560, height: 480, component: PhotosApp   },
-  music:    { title: 'lofi.player',   icon: Music,     width: 340, height: 480, component: null        },
+      
 }
 
 const stickyNotes = [
-  { text: 'kain na!',        top: '12%', right: '4%',  rotate: '2deg',    color: '#fef08a' },
+  { text: 'vibe code tym',        top: '12%', right: '4%',  rotate: '2deg',    color: '#fef08a' },
   { text: 'El Psy Kongroo.', top: '35%', right: '3%',  rotate: '-1.5deg', color: '#bbf7d0' },
   { text: 'hire me pls',     top: '58%', right: '5%',  rotate: '1deg',    color: '#fecdd3' },
 ]
@@ -34,17 +33,16 @@ const stickyNotes = [
 const desktopIcons = [
   { id: 'readme', icon: FileText, label: 'README.txt' },
   { id: 'photos', icon: Image,    label: 'gallery/'   },
-  { id: 'music',  icon: Music,    label: 'lofi.player'},
+
 ]
 
 const bootLines = [
   'AHRON OS v1.0',
   'Booting system...',
   'Loading portfolio assets...',
-  'Mounting personality modules...',
-  'El Psy Kongroo.',
   'Welcome.',
 ]
+
 
 export default function Desktop() {
   const { windows, openWindow, closeWindow, minimizeWindow, focusWindow, moveWindow } = useWindow()
@@ -52,7 +50,15 @@ export default function Desktop() {
   const [bootText, setBootText]     = useState('')
   const [bootCharIdx, setBootCharIdx] = useState(0)
   const [bootLineIdx, setBootLineIdx] = useState(0)
-  const [nowPlaying, setNowPlaying] = useState(null)
+ 
+
+  const toggleWindow = useCallback((id) => {
+  if (windows[id]?.open && !windows[id]?.minimized) {
+    minimizeWindow(id)
+  } else {
+    openWindow(id)
+  }
+}, [windows, minimizeWindow, openWindow])
 
   // Boot sequence — character by character
   useEffect(() => {
@@ -82,7 +88,7 @@ export default function Desktop() {
     let typed = ''
     const handler = (e) => {
       typed += e.key.toLowerCase()
-      if (typed.includes('elpsy')) { openWindow('secret'); typed = '' }
+      if (typed.includes('gab')) { openWindow('secret'); typed = '' }
       if (typed.length > 10) typed = typed.slice(-10)
     }
     window.addEventListener('keydown', handler)
@@ -132,11 +138,7 @@ export default function Desktop() {
     
         </div>
         <div className="flex items-center gap-4">
-          {nowPlaying && (
-            <span style={{ fontFamily: 'DM Mono', fontSize: '0.6rem', color: 'var(--os-blue)' }}>
-              ♫ {nowPlaying.title}
-            </span>
-          )}
+            
           <span style={{ color: 'var(--os-muted)', fontSize: '0.65rem', fontFamily: 'DM Mono' }}>PH</span>
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#22c55e' }} />
@@ -210,10 +212,9 @@ export default function Desktop() {
 
       {/* Windows */}
       {Object.entries(windowConfig).map(([id, cfg]) => {
-        let Component
+        let Component = cfg.component
         if (id === 'music') Component = () => <MusicApp onTrackChange={setNowPlaying} />
-        else if (id === 'hero') Component = () => <HeroApp onOpenProjects={() => openWindow('projects')} />
-        else Component = cfg.component
+        if (!Component) return null
 
         return (
             <Window
@@ -236,11 +237,11 @@ export default function Desktop() {
       <div className="absolute bottom-24 left-1/2 -translate-x-1/2 pointer-events-none">
         <p className="text-xs font-mono text-center"
           style={{ color: 'var(--os-muted)', opacity: 0.4, letterSpacing: '0.08em', fontSize: '0.65rem' }}>
-          psst — try typing something
+          psst — type my nickname
         </p>
       </div>
 
-      <Taskbar windows={windows} onOpen={openWindow} />
+      <Taskbar windows={windows} onOpen={openWindow} onToggle={toggleWindow} />
     </div>
   )
 }

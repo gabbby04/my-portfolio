@@ -8,10 +8,17 @@ export default function Clock() {
     return () => clearInterval(t)
   }, [])
 
-  const hours   = time.toLocaleString('en-PH', { hour: '2-digit',   hour12: true,  timeZone: 'Asia/Manila' }).replace(/\s?[AP]M/i, '')
-  const minutes = time.toLocaleString('en-PH', { minute: '2-digit',                timeZone: 'Asia/Manila' })
-  const seconds = time.toLocaleString('en-PH', { second: '2-digit',                timeZone: 'Asia/Manila' })
-  const ampm    = time.toLocaleString('en-PH', { hour: '2-digit',   hour12: true,  timeZone: 'Asia/Manila' }).slice(-2)
+  const formatted = time.toLocaleTimeString('en-PH', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true,
+    timeZone: 'Asia/Manila',
+  })
+
+
+  const [timePart, ampm] = formatted.split(' ')
+  const [hours, minutes, seconds] = timePart.split(':')
 
   return (
     <div className="absolute select-none" style={{ top: '12%', left: '3%' }}>
@@ -27,23 +34,33 @@ export default function Clock() {
         <div className="flex items-end gap-1 leading-none">
           <span
             style={{
-              fontFamily: 'Syne',
-              fontWeight: 800,
-              fontSize: '3rem',
-              color: 'var(--os-dark)',
-              letterSpacing: '-0.03em',
-              lineHeight: 1,
+                fontFamily: "'Space Mono', monospace",
+                fontWeight: 700,
+                fontSize: '3rem',
+                color: 'var(--os-dark)',
+                letterSpacing: '-0.03em',
+                lineHeight: 1,
             }}
-          >
+            >
             {hours}
             <span style={{ color: 'var(--os-blue)' }}>:</span>
             {minutes}
           </span>
           <div className="flex flex-col mb-1" style={{ gap: '2px' }}>
-            <span style={{ fontFamily: 'DM Mono', fontSize: '0.6rem', color: 'var(--os-blue)', lineHeight: 1 }}>
+            <span style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: '0.6rem',
+              color: 'var(--os-blue)',
+              lineHeight: 1,
+            }}>
               {ampm}
             </span>
-            <span style={{ fontFamily: 'DM Mono', fontSize: '0.6rem', color: 'var(--os-muted)', lineHeight: 1 }}>
+            <span style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: '0.6rem',
+              color: 'var(--os-muted)',
+              lineHeight: 1,
+            }}>
               :{seconds}
             </span>
           </div>
