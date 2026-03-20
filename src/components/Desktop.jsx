@@ -14,7 +14,7 @@ import ReadmeApp from './apps/ReadMeApp'
 import PhotosApp from './apps/PhotosApp'
 
 const windowConfig = {
-  hero: { title: 'ahron.me', icon: User, width: 620, height: 560, component: HeroApp },
+  hero: { title: 'ahron.me', icon: User, width: 520, height: 480, component: HeroApp },
   skills:   { title: 'skills.exe',    icon: Zap,       width: 500, height: 420, component: SkillsApp   },
   projects: { title: 'projects/',     icon: FolderOpen,width: 560, height: 480, component: ProjectsApp },
   contact:  { title: 'contact.form',  icon: Mail,      width: 480, height: 500, component: ContactApp  },

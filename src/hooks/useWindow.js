@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 
 export default function useWindow(initialState = {}) {
   const [windows, setWindows] = useState({
-    hero:     { open: true,  minimized: false, zIndex: 10, x: 80,  y: 60  },
+    hero: { open: true, minimized: false, zIndex: 10, x: 60, y: 45 },
     skills:   { open: false, minimized: false, zIndex: 9,  x: 160, y: 100 },
     projects: { open: false, minimized: false, zIndex: 9,  x: 200, y: 80  },
     contact:  { open: false, minimized: false, zIndex: 9,  x: 120, y: 90  },
